@@ -1,0 +1,191 @@
+[
+    {
+        "model": "crm.quizanswer",
+        "pk": 1,
+        "fields": {
+            "question": 1,
+            "answer_text": "To manage employee payroll",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 2,
+        "fields": {
+            "question": 1,
+            "answer_text": "To streamline customer relationships",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 3,
+        "fields": {
+            "question": 1,
+            "answer_text": "To automate inventory management",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 4,
+        "fields": {
+            "question": 2,
+            "answer_text": "Invoice Generation",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 5,
+        "fields": {
+            "question": 2,
+            "answer_text": "Sales Pipeline Tracking",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 6,
+        "fields": {
+            "question": 2,
+            "answer_text": "Document Uploader",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 7,
+        "fields": {
+            "question": 3,
+            "answer_text": "Navigate to \"Sales Pipeline Tracking\" and click \"Add Customer.\"",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 8,
+        "fields": {
+            "question": 3,
+            "answer_text": "Access \"Task and Activity Management\" and select \"Create New Customer.\"",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 9,
+        "fields": {
+            "question": 3,
+            "answer_text": "Go to \"Customer Tracker\" and choose \"Add Customer.\"",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 10,
+        "fields": {
+            "question": 4,
+            "answer_text": "Generating detailed invoices",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 11,
+        "fields": {
+            "question": 4,
+            "answer_text": "Managing user permissions and access control",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 12,
+        "fields": {
+            "question": 4,
+            "answer_text": "Creating customer profiles",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 13,
+        "fields": {
+            "question": 5,
+            "answer_text": "By managing employee benefits",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 14,
+        "fields": {
+            "question": 5,
+            "answer_text": "By streamlining customer relationships and boosting productivity",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 15,
+        "fields": {
+            "question": 5,
+            "answer_text": "By automating shipping and logistics",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 16,
+        "fields": {
+            "question": 6,
+            "answer_text": "Centralized document storage",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 17,
+        "fields": {
+            "question": 6,
+            "answer_text": "Real-time sales insights",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 18,
+        "fields": {
+            "question": 6,
+            "answer_text": "Comprehensive customer profiles with interactions and purchase history",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 19,
+        "fields": {
+            "question": 7,
+            "answer_text": "By generating detailed invoices",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 20,
+        "fields": {
+            "question": 7,
+            "answer_text": "Through user permissions and access control",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "crm.quizanswer",
+        "pk": 21,
+        "fields": {
+            "question": 7,
+            "answer_text": "By organizing and tracking customer inquiries in a support system",
+            "is_correct": true
+        }
+    }
+]

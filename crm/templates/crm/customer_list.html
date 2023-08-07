@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% block title %}Limitless CRM - Customers{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4">Customer List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.address }}</td>
+                        <td>
+                            <a href="{% url 'edit_customer' customer.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a href="{% url 'delete_customer' customer.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="#" onClick="printInvoice('{{ customer.id }}')" class="btn btn-success btn-sm">Generate Invoice</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add_customer' %}" class="btn btn-primary">Add Customer</a>
+    </div>
+
+<script>
+    function printInvoice(customerId) {
+        let invoices = JSON.parse(`{{ invoices|safe }}`);
+        let base64Content = invoices[customerId];
+        let decodedContent = atob(base64Content);
+        let blob = new Blob([decodedContent], { type: 'text/html' });
+        let url = URL.createObjectURL(blob);
+        const printWindow = window.open(url, '_blank');
+        printWindow.onload = () => {
+            printWindow.print();
+            URL.revokeObjectURL(url);
+            setTimeout(() => printWindow.close(),0);
+        };
+    }
+    
+</script>
+
+{% endblock %}

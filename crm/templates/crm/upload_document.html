@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}Limitless CRM - Upload Document{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4">Upload Document</h1>
+        <form method="post" enctype="multipart/form-data" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button button_type="submit" content="Upload" %}
+        </form>
+    </div>
+{% endblock %}

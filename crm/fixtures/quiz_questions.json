@@ -1,0 +1,51 @@
+[
+    {
+        "model": "crm.quizquestion",
+        "pk": 1,
+        "fields": {
+            "question": "What is the primary purpose of a CRM system in a small enterprise?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 2,
+        "fields": {
+            "question": "Which feature allows users to upload and attach documents like invoices to specific customer profiles?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 3,
+        "fields": {
+            "question": "How can you add a new customer to the CRM system?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 4,
+        "fields": {
+            "question": "What does the CRM system prioritize to ensure data security?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 5,
+        "fields": {
+            "question": "How does the CRM system benefit small enterprises?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 6,
+        "fields": {
+            "question": "What advantage does the \"Customer Tracker\" offer to users in the CRM system?",
+        }
+    },
+    {
+        "model": "crm.quizquestion",
+        "pk": 7,
+        "fields": {
+            "question": "How does the CRM system support small enterprises in resolving customer issues promptly?",
+        }
+    }
+]

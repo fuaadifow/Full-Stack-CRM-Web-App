@@ -1,0 +1,45 @@
+[
+    {
+      "model": "crm.customer",
+      "pk": 1,
+      "fields": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "555-1234",
+        "address": "123 Main Street, City"
+      }
+    },
+    {
+      "model": "crm.customer",
+      "pk": 2,
+      "fields": {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phone": "555-5678",
+        "address": "456 Elm Street, Town"
+      }
+    },
+    {
+      "model": "crm.document",
+      "pk": 1,
+      "fields": {
+        "user": 1,
+        "customer": 1,
+        "title": "Invoice 001",
+        "file": "path/to/invoice001.pdf",
+        "upload_date": "2023-07-23T12:00:00Z"
+      }
+    },
+    {
+      "model": "crm.document",
+      "pk": 2,
+      "fields": {
+        "user": 1,
+        "customer": 2,
+        "title": "Contract Agreement",
+        "file": "path/to/contract_agreement.pdf",
+        "upload_date": "2023-07-23T13:00:00Z"
+      }
+    }
+  ]
+  

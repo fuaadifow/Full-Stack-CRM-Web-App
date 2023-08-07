@@ -1,0 +1,2 @@
+django-bootstrap5
+django_forms_bootstrap
