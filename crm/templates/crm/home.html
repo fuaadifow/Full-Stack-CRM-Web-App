@@ -4,3 +4,33 @@
 
 {% block title %}Limitless CRM - Home{% endblock %}
 
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{% static 'crm/images/logo.jpg' %}" alt="CRM Image" class="img-fluid img_logo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Welcome to our cutting-edge CRM system!</h2>
+                <p>Your ultimate solution for efficient customer management and seamless document handling.</p>
+                <p>We are thrilled to have you on board! Our platform is meticulously designed to empower businesses like yours to effortlessly nurture customer relationships while streamlining the management of crucial documents. With our user-friendly interface, you can easily upload, organize, and access documents, ensuring that essential information is at your fingertips when you need it most.</p>
+                <p>Our customer manager feature is a game-changer, offering you a comprehensive view of all your clients in one place. Stay on top of your interactions with each customer, track progress, and cultivate lasting connections. Whether you're a small startup or a well-established enterprise, our CRM system is tailored to cater to your unique needs, allowing you to focus on what truly matters – growing your business.</p>
+                <p>As you embark on this journey with us, rest assured that our team is committed to providing you with exceptional support and a smooth user experience. We believe that your success is our success, and we're dedicated to being there every step of the way. Thank you for choosing our CRM system; we can't wait to witness the incredible achievements your organization will make with our powerful tools at your disposal. Let's create something extraordinary together!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add the chatbot integration script here -->
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"16bba1519a50328f3dfe7bafc4cb3ea01","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
+{% endblock %}
