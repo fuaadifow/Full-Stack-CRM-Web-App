@@ -21,7 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tasks/', include('task_manager.urls')),
     path('', include('crm.urls')),
+    
 ]
 
 if settings.DEBUG:

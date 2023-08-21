@@ -1,0 +1,181 @@
+{% extends 'base/base.html' %}
+{% load django_bootstrap5 %}
+{% load custom_filters %}
+
+{% block title %}Limitless CRM - About{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>About Limitless CRM</h1>
+            <hr>
+                <!-- Display information about the application here -->
+                <p>
+                    Welcome to our innovative Customer Relationship Management (CRM) system named
+                    “LimitlessCRM”, designed to elevate your small enterprise by streamlining operations, empowering
+                    your team, and fostering exceptional customer relationships. Navigating our CRM application is as
+                    intuitive as it is efficient, and here's a step-by-step guide to help you make the most of its powerful
+                    features:
+                </p>
+                <ol>
+                    <li><strong>Customer Tracker:</strong> The heart of our CRM system lies in the Customer Tracker, where you can
+                        easily manage and organize vital customer information. To add a new customer, simply navigate to
+                        the "Add Customer" section and enter relevant details such as name, contact information, and any
+                        other pertinent data. Once added, you'll have a comprehensive profile to track interactions, purchase
+                        history, and customer preferences, enabling personalized experiences that leave a lasting impression.
+                    </li>
+                    <li><strong>Invoice Generation:</strong> Seamlessly create invoices with just a few clicks, thanks to our integrated
+                        Invoice Generation feature. When viewing a customer's profile, access the "Create Invoice" option to
+                        enter product or service details, pricing, and any applicable discounts. The system will automatically
+                        populate customer information, saving time and minimizing errors. Once generated, the invoice is
+                        easily accessible for future reference or printing.
+                    </li>
+                    <li><strong>Document Uploader:</strong> Our CRM system understands the importance of document
+                        management. Utilize the Document Uploader to effortlessly upload and attach files like invoices,
+                        contracts, or any other relevant documents to specific customer profiles. This ensures that all crucial
+                        information is centralized and readily accessible when needed, promoting organized and efficient
+                        workflows.
+                    </li>
+                    <li><strong>User Permissions and Security:</strong> Our CRM system prioritizes data security and user access
+                        control. Administrators can manage user permissions, ensuring that sensitive information is only
+                        accessible to authorized personnel, safeguarding your business's confidentiality.
+                    </li>
+                </ol>
+                <p>
+                    In conclusion, our CRM application offers a user-friendly and seamless navigation experience,
+                    enabling you to connect with your customers, streamline processes, and elevate your small
+                    enterprise to new heights of success. Take advantage of the Customer Tracker to manage valuable
+                    customer information, the Invoice Generation feature to create professional invoices, and the
+                    Document Uploader to centralize important files. Combined with robust sales pipeline tracking, task
+                    management, and insightful analytics, our CRM system is the ultimate tool to empower your team
+                    and foster exceptional customer relationships.
+                </p>
+            </div>
+            <div class="col-md-4 py-5">
+                <!-- Quiz section -->
+                <h2>Quiz</h2>
+                {% if not certificate %}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quizModal">
+                        Start Quiz
+                    </button>
+                {% endif %}
+                {% if certificate %}
+                <hr/>
+                            <ul class="list-group">
+                                    <li class="list-group-item border border-2 {% if quiz_questions.count|checkScores:certificate.score %}border-success{% else %}border-danger{% endif %}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <strong>Result:</strong> {{ certificate.score }}/{{ quiz_questions.count }}<br>
+                                                <strong>Result:</strong> {% if quiz_questions.count|checkScores:certificate.score %} Passed {% else %} Failed {% endif %}<br>
+                                                <strong>Incorrect Answers:</strong> {{ quiz_questions.count|subtract:certificate.score }}<br>
+                                                <strong>Date Issued:</strong> {{ certificate.date_issued }}
+                                                <div class="mt-3 mb-1">
+                                                    <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#quizModal"><strong>Try Again</strong></button>
+                                                    <a class="btn btn-outline-success" href="/"><strong>Back To Training</strong></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>No certificates earned yet.</p>
+                {% endif %}
+                
+    </div>
+
+     <!-- Quiz Modal -->
+     <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quizModalLabel">CRM System Quiz: Test Your Knowledge!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quizForm" method="post" class="form">
+                        {% csrf_token %}
+                        <div class="question-container">
+                            {% for question in quiz_questions %}
+                                <div class="question {% if not forloop.first %}d-none{% endif %}" id="question_{{ question.id }}">
+                                    <p><strong>{{ question.question }}</strong></p>
+                                    {% for option in question.get_options %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="option{{ forloop.counter }}_{{ question.id }}" value="{{ option }}" required>
+                                            <label class="form-check-label checkbox-label" for="option{{ forloop.counter }}_{{ question.id }}">{{ option }}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button class="btn btn-secondary d-none" type="button" onclick="prevQuestion()" id="prevBtn">Back</button>
+                            <button class="btn btn-primary flex-fill" type="button" onclick="nextQuestion()" id="nextBtn">Next</button>
+                            <button class="btn btn-success flex-fill d-none" type="submit" id="submitBtn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <script>
+        var currentQuestion = 0;
+        var questions = document.getElementsByClassName('question');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var submitBtn = document.getElementById('submitBtn');
+    
+        function startQuiz() {
+            currentQuestion = 0;
+            showQuestion(currentQuestion);
+            prevBtn.classList.add('d-none');
+            nextBtn.classList.remove('d-none');
+            submitBtn.classList.add('d-none');
+            $('#quizModal').modal('show');
+        }
+    
+        function prevQuestion() {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+            if (currentQuestion === 0) {
+                prevBtn.classList.add('d-none');
+            }
+            nextBtn.classList.remove('d-none');
+            submitBtn.classList.add('d-none');
+        }
+    
+        function nextQuestion() {
+            // Check if an answer is selected for the current question
+            var selectedOption = document.querySelector('input[name="' + questions[currentQuestion].id + '"]:checked');
+            if (!selectedOption) {
+                // Show alert if no answer is selected
+                alert('Please select an answer before proceeding to the next question.');
+                return;
+            }
+    
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                prevBtn.classList.remove('d-none');
+                if (currentQuestion === questions.length - 1) {
+                    nextBtn.classList.add('d-none');
+                    submitBtn.classList.remove('d-none');
+                }
+            }
+        }
+    
+        function showQuestion(questionIndex) {
+            for (var i = 0; i < questions.length; i++) {
+                if (i === questionIndex) {
+                    questions[i].classList.remove('d-none');
+                } else {
+                    questions[i].classList.add('d-none');
+                }
+            }
+        }
+    </script>
+    
+{% endblock %}

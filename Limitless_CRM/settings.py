@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crm',
     'django_bootstrap5',
     'django_forms_bootstrap',
+    'task_manager'
 ]
 
 MIDDLEWARE = [

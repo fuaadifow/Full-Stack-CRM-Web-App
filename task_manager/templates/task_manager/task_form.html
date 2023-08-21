@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Task Form</h2>
+    <form method="post" id="taskForm">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group  mb-4">
+                <label for="id_title">Task Title:</label>
+                <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}" id="id_title" name="title" value="{{ form.title.value|default_if_none:"" }}">
+                {% if form.title.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.title.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group  mb-4">
+                <label for="id_priority">Priority:</label>
+                <select class="form-control {% if form.priority.errors %}is-invalid{% endif %}" id="id_priority" name="priority">
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="low">Low Priority</option>
+                </select>
+                {% if form.priority.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.priority.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  mb-4">
+                <label for="id_assigned_to_name">Assigned To:</label>
+                <input type="text" class="form-control {% if form.assigned_to_name.errors %}is-invalid{% endif %}" id="id_assigned_to_name" name="assigned_to_name" value="{{ form.assigned_to_name.value|default_if_none:"" }}">
+                {% if form.assigned_to_name.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.assigned_to_name.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group  mb-4">
+                <label for="id_assigned_to_position">Position:</label>
+                <input type="text" class="form-control {% if form.assigned_to_position.errors %}is-invalid{% endif %}" id="id_assigned_to_position" name="assigned_to_position" value="{{ form.assigned_to_position.value|default_if_none:"" }}">
+                {% if form.assigned_to_position.errors %}
+                    <div class="invalid-feedback">
+                        {{ form.assigned_to_position.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group mb-4">
+            <label for="id_assigned_to_email">Email Address:</label>
+            <input type="email" class="form-control {% if form.assigned_to_email.errors %}is-invalid{% endif %}" id="id_assigned_to_email" name="assigned_to_email" value="{{ form.assigned_to_email.value|default_if_none:"" }}">
+            {% if form.assigned_to_email.errors %}
+                <div class="invalid-feedback">
+                    {{ form.assigned_to_email.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group mb-4">
+            <label for="id_description">Description:</label>
+            <textarea class="form-control {% if form.description.errors %}is-invalid{% endif %}" id="id_description" name="description">{{ form.description.value|default_if_none:"" }}</textarea>
+            {% if form.description.errors %}
+                <div class="invalid-feedback">
+                    {{ form.description.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group mb-4">
+            <label for="id_due_date">Due Date:</label>
+            <input type="datetime-local" class="form-control {% if form.due_date.errors %}is-invalid{% endif %}" id="id_due_date" name="due_date" value="{{ form.due_date.value|default_if_none:"" }}">
+            {% if form.due_date.errors %}
+                <div class="invalid-feedback">
+                    {{ form.due_date.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group mb-4">
+            <label for="id_status">Status:</label>
+            <select class="form-control {% if form.status.errors %}is-invalid{% endif %}" id="id_status" name="status">
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            {% if form.status.errors %}
+                <div class="invalid-feedback">
+                    {{ form.status.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Bootstrap Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+{% endblock %}
+
+
