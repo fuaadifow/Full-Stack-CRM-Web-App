@@ -11,7 +11,7 @@ class Customer(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     address = models.TextField()
-    # Add other fields as needed
+
 
     def __str__(self):
         return self.name
