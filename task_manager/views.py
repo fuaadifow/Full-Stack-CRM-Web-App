@@ -1,23 +1,34 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task
 from .forms import TaskForm
-from django.db.models import F, Case, When, Value, IntegerField
-from datetime import datetime, timedelta
+from django.utils import timezone
+from django.db.models import F, Case, When, Value
 
-# the code below is a sorting algorithm which fetches tasks from the database for the currently logged-in user, calculates the urgency of each task based on its due date, and sorts the tasks based on urgency, due date, and priority
+
 def task_list(request):
     user = request.user
-    today = datetime.now()
-    one_week_later = today + timedelta(days=7)
+
     tasks = Task.objects.filter(
         user=user
-    ).annotate(
-        urgency=Case(
-            When(due_date__lte=one_week_later, then=Value(1)),
-            default=Value(2),
-            output_field=IntegerField()
+    ).order_by(
+        Case(
+            When(due_date__isnull=True, then=Value(timezone.datetime.max)),
+            default=F('due_date'),
         )
-    ).order_by('urgency', F('due_date').asc(nulls_last=True), 'priority')
+    )
+
+    for task in tasks:
+        due_date = task.due_date
+        if due_date:
+            time_diff = (due_date - timezone.now()).days
+            if time_diff < 7:
+                task.priority = 'High Priority'
+            elif 7 <= time_diff < 14:
+                task.priority = 'Medium Priority'
+            else:
+                task.priority = 'Low Priority'
+        else:
+            task.priority = 'No Due Date'
 
     return render(request, 'task_manager/task_list.html', {'tasks': tasks})
 

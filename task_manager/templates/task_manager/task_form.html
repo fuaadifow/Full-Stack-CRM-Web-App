@@ -16,19 +16,7 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="form-group  mb-4">
-                <label for="id_priority">Priority:</label>
-                <select class="form-control {% if form.priority.errors %}is-invalid{% endif %}" id="id_priority" name="priority">
-                    <option value="high">High Priority</option>
-                    <option value="medium">Medium Priority</option>
-                    <option value="low">Low Priority</option>
-                </select>
-                {% if form.priority.errors %}
-                    <div class="invalid-feedback">
-                        {{ form.priority.errors|join:", " }}
-                    </div>
-                {% endif %}
-            </div>
+
         </div>
         <div class="form-row">
             <div class="form-group  mb-4">
@@ -70,7 +58,7 @@
         </div>
         <div class="form-group mb-4">
             <label for="id_due_date">Due Date:</label>
-            <input type="datetime-local" class="form-control {% if form.due_date.errors %}is-invalid{% endif %}" id="id_due_date" name="due_date" value="{{ form.due_date.value|default_if_none:"" }}">
+            <input type="datetime-local" class="form-control {% if form.due_date.errors %}is-invalid{% endif %}" id="id_due_date" name="due_date" value="{{ form.due_date.value|default_if_none:'' }}">
             {% if form.due_date.errors %}
                 <div class="invalid-feedback">
                     {{ form.due_date.errors|join:", " }}
