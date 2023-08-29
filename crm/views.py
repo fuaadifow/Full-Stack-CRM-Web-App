@@ -20,7 +20,7 @@ def home(request):
 #     return render(request, 'crm/about.html')
 
 def faq(request):
-    return render(request, 'crm/faq.html')
+    return render(request, 'crm/FAQ.html')
 
 def register(request):
     if request.method == 'POST':
