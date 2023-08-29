@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     'shielded-wave-09162-02d8bd421ad4.herokuapp.com',
     '127.0.0.1',
     'https://www.limitless-crm.com ',
+    'www.limitless-crm.com',
 ]
 
 
