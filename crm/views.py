@@ -16,9 +16,6 @@ import json
 def home(request):
     return render(request, 'crm/home.html')
 
-# def about(request):
-#     return render(request, 'crm/about.html')
-
 def faq(request):
     return render(request, 'crm/FAQ.html')
 
