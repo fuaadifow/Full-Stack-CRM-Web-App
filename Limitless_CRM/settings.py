@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'shielded-wave-09162-02d8bd421ad4.herokuapp.com',
     '127.0.0.1',
-    'www.limitless-crm.com',
+    'https://www.limitless-crm.com ',
 ]
 
 
