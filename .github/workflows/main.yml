@@ -21,7 +21,6 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip
 
-
       - name: Install requirements
         run: python -m pip install -r requirements.txt
 
@@ -37,9 +36,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          python-version: 3.x
+
+      - name: Install Heroku CLI
+        run: |
+          wget https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
+          mkdir -p /usr/local/lib /usr/local/bin
+          tar -xvzf heroku-linux-x64.tar.gz -C /usr/local/lib
+          ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+          rm heroku-linux-x64.tar.gz
+
+      - name: Configure Heroku
+        run: |
+          echo "machine api.heroku.com login ${{ secrets.HEROKU_EMAIL }} password ${{ secrets.HEROKU_API_KEY }}" > ~/.netrc
+          chmod 600 ~/.netrc
+
+      - name: Deploy to Heroku
+        run: |
+          git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+          git push heroku HEAD:refs/heads/master --force
